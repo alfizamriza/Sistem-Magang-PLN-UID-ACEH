@@ -23,7 +23,7 @@ class AdminAuthController extends Controller
             'password' => 'required',
         ]);
 
-        Authenticate against admins table with hashed password
+        // Authenticate against admins table with hashed password
         $admin = Admin::where('username', $request->username)->first();
         if ($admin && Hash::check($request->password, $admin->password)) {
             Session::put('is_admin', true);
