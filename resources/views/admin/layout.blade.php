@@ -66,6 +66,18 @@
                         <i class="fas fa-chevron-right text-gray-400 group-hover:text-purple-600 transition-colors duration-200"></i>
                     </a>
 
+                    <!-- Tambah Admin -->
+                    <a href="{{ route('admin.admins.create') }}" class="nav-item group">
+                        <div class="nav-icon-wrapper bg-gradient-to-br from-teal-500 to-teal-600">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="flex-1">
+                            <span class="nav-title">Tambah Admin</span>
+                            <span class="nav-subtitle">Buat akun admin baru</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400 group-hover:text-teal-600 transition-colors duration-200"></i>
+                    </a>
+
                     <!-- Atur Posisi -->
                     <a href="{{ url('/dashboard/atur-posisi') }}" class="nav-item group">
                         <div class="nav-icon-wrapper bg-gradient-to-br from-orange-500 to-orange-600">

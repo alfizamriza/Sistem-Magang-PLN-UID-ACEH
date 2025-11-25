@@ -34,6 +34,10 @@ Route::post('/logout', function () {
 
 // Dashboard menu routes (protected by admin session)
 use App\Http\Controllers\AdminParticipantController;
+// Admin registration routes (create/store) are public only for initial setup.
+// The controller prevents registration when admins already exist.
+Route::get('/dashboard/admins/create', [\App\Http\Controllers\AdminAuthController::class, 'create'])->name('admin.admins.create');
+Route::post('/dashboard/admins', [\App\Http\Controllers\AdminAuthController::class, 'store'])->name('admin.admins.store');
 
 Route::middleware(\App\Http\Middleware\AdminAuthMiddleware::class)->group(function () {
     // Peserta baru (pending) and detail

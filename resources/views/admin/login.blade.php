@@ -64,10 +64,14 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
                             </div>
-                            <input type="text" name="username" id="username" 
-                                   class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all duration-300 text-gray-900 placeholder-gray-400" 
-                                   placeholder="Masukkan username Anda"
-                                   required>
+                            <input 
+                                type="text" 
+                                name="username" 
+                                id="username"
+                                class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all duration-300 text-gray-900 placeholder-gray-400" 
+                                placeholder="Masukkan username Anda"
+                                required
+                            >
                         </div>
                     </div>
 
@@ -85,11 +89,19 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                                 </svg>
                             </div>
-                            <input type="password" name="password" id="password" 
-                                   class="w-full pl-12 pr-12 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all duration-300 text-gray-900 placeholder-gray-400" 
-                                   placeholder="Masukkan password Anda"
-                                   required>
-                            <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors">
+                            <input 
+                                type="password" 
+                                name="password" 
+                                id="password"
+                                class="w-full pl-12 pr-12 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all duration-300 text-gray-900 placeholder-gray-400" 
+                                placeholder="Masukkan password Anda"
+                                required
+                            >
+                            <button 
+                                type="button" 
+                                id="togglePassword" 
+                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                            >
                                 <svg id="eyeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -125,114 +137,94 @@
                     @endif
 
                     <!-- Login Button -->
-                    <button type="submit" id="loginButton"
-                            class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center justify-center space-x-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-                        </svg>
-                        <span id="buttonText">Login ke Dashboard</span>
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg transition-all duration-300 flex items-center justify-center"
+                    >
+                        <span id="buttonText">Masuk</span>
                     </button>
+
+                    <!-- (Register button removed) -->
                 </form>
-
-                {{-- <!-- Additional Info -->
-                <div class="mt-8 pt-6 border-t border-gray-200 text-center">
-                    <p class="text-sm text-gray-600 mb-3">Butuh bantuan?</p>
-                    <div class="flex items-center justify-center space-x-4">
-                        <a href="#" class="text-xs text-blue-600 hover:text-blue-800 font-medium transition-colors flex items-center">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            FAQ
-                        </a>
-                        <span class="text-gray-300">|</span>
-                        <a href="#" class="text-xs text-blue-600 hover:text-blue-800 font-medium transition-colors flex items-center">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            Hubungi Admin
-                        </a>
-                    </div>
-                </div> --}}
-            </div>
-        </div>
-
-        <!-- Footer Info -->
-        <div class="mt-8 text-center animate-fade-in-up" style="animation-delay: 0.2s">
-            <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
-                <p class="text-white text-sm font-medium">⚡ PT PLN (Persero) Unit Induk Distribusi Aceh</p>
-                <p class="text-blue-200 text-xs mt-2">Sistem Manajemen Magang © 2025</p>
-                <div class="flex items-center justify-center space-x-2 mt-3">
-                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                    <span class="text-green-300 text-xs font-medium">Sistem Aktif</span>
-                </div>
             </div>
         </div>
     </div>
 
+    <!-- (Registration modal removed) -->
+
+    <!-- Scripts -->
     <script>
         // Toggle Password Visibility
         const togglePassword = document.getElementById('togglePassword');
         const password = document.getElementById('password');
         const eyeIcon = document.getElementById('eyeIcon');
 
-        togglePassword.addEventListener('click', function() {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            
-            if (type === 'text') {
-                eyeIcon.innerHTML = `
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>
-                `;
-            } else {
-                eyeIcon.innerHTML = `
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                `;
-            }
-        });
+        if (togglePassword && password && eyeIcon) {
+            togglePassword.addEventListener('click', function () {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+
+                if (type === 'text') {
+                    eyeIcon.innerHTML = `
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>
+                    `;
+                } else {
+                    eyeIcon.innerHTML = `
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                    `;
+                }
+            });
+        }
 
         // Form Submission Animation
         const loginForm = document.getElementById('loginForm');
         const loginButton = document.getElementById('loginButton');
         const buttonText = document.getElementById('buttonText');
 
-        loginForm.addEventListener('submit', function(e) {
-            loginButton.disabled = true;
-            loginButton.classList.add('opacity-75', 'cursor-not-allowed');
-            buttonText.innerHTML = `
-                <svg class="animate-spin w-5 h-5 inline mr-2" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Memproses...
-            `;
-        });
+        if (loginForm && loginButton && buttonText) {
+            loginForm.addEventListener('submit', function () {
+                loginButton.disabled = true;
+                loginButton.classList.add('opacity-75', 'cursor-not-allowed');
+                buttonText.innerHTML = `
+                    <svg class="animate-spin w-5 h-5 inline mr-2" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Memproses...
+                `;
+            });
+        }
 
         // Input Focus Animation
         const inputs = document.querySelectorAll('input[type="text"], input[type="password"]');
         inputs.forEach(input => {
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 this.parentElement.classList.add('ring-2', 'ring-blue-300');
             });
-            
-            input.addEventListener('blur', function() {
+            input.addEventListener('blur', function () {
                 this.parentElement.classList.remove('ring-2', 'ring-blue-300');
             });
         });
 
         // Keyboard Shortcuts
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             // Alt + L to focus username
             if (e.altKey && e.key === 'l') {
                 e.preventDefault();
-                document.getElementById('username').focus();
+                const usernameInput = document.getElementById('username');
+                if (usernameInput) usernameInput.focus();
             }
         });
 
         // Auto-focus username on load
-        window.addEventListener('load', function() {
-            document.getElementById('username').focus();
+        window.addEventListener('load', function () {
+            const usernameInput = document.getElementById('username');
+            if (usernameInput) usernameInput.focus();
         });
+
+        // (Registration modal handlers removed)
     </script>
 
     <style>

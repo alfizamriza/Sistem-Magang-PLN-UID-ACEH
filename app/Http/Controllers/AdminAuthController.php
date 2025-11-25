@@ -74,4 +74,37 @@ class AdminAuthController extends Controller
             'jumlahArr' => $jumlahArr,
         ]);
     }
+
+    // Show form to create a new admin (only for logged-in admins)
+    public function create()
+    {
+        if (!Session::get('is_admin')) {
+            return redirect()->route('login');
+        }
+
+        return view('admin.register');
+    }
+
+    // Store a new admin account
+    public function store(Request $request)
+    {
+        if (!Session::get('is_admin')) {
+            return redirect()->route('login');
+        }
+
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:50|unique:admins,username',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Create admin (hash password)
+        $admin = Admin::create([
+            'name' => $data['name'],
+            'username' => $data['username'],
+            'password' => \Illuminate\Support\Facades\Hash::make($data['password']),
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Akun admin baru berhasil dibuat.');
+    }
 }
