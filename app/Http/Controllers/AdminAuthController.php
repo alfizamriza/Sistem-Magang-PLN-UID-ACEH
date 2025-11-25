@@ -24,16 +24,27 @@ class AdminAuthController extends Controller
         ]);
 
         // Authenticate against admins table with hashed password
+        // $admin = Admin::where('username', $request->username)->first();
+        // if ($admin && Hash::check($request->password, $admin->password)) {
+        //     Session::put('is_admin', true);
+        //     // optionally store admin id/name in session
+        //     Session::put('admin_id', $admin->id);
+        //     Session::put('admin_name', $admin->name);
+        //     return redirect()->route('dashboard');
+        // }
+
+        // return back()->withErrors(['username' => 'Username atau password salah']);
         $admin = Admin::where('username', $request->username)->first();
-        if ($admin && Hash::check($request->password, $admin->password)) {
+
+        if ($admin && $request->password === $admin->password) {
             Session::put('is_admin', true);
-            // optionally store admin id/name in session
             Session::put('admin_id', $admin->id);
             Session::put('admin_name', $admin->name);
-            return redirect()->route('dashboard');
-        }
 
-        return back()->withErrors(['username' => 'Username atau password salah']);
+            return redirect()->route('dashboard');
+        } else {
+            return back()->withErrors(['login' => 'Username atau password salah.']);
+        }
     }
 
     // Dashboard admin
