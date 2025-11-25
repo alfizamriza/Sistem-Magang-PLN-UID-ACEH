@@ -466,7 +466,7 @@ in the Software without restriction...
 
 ## 📞 Kontak
 
-- **GitHub**: https://github.com/alfizamriza/sistem-magang-pln-aceh
+- **GitHub**: [https://github.com/alfizamriza/sistem-magang-pln-aceh](https://github.com/alfizamriza/Sistem-Magang-PLN-UID-ACEH.git)
 
 ---
 
