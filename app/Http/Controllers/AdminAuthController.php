@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Admin;
+use App\Models\Participant;
+use Carbon\Carbon;
 
 class AdminAuthController extends Controller
 {
@@ -24,27 +26,27 @@ class AdminAuthController extends Controller
         ]);
 
         // Authenticate against admins table with hashed password
-        // $admin = Admin::where('username', $request->username)->first();
-        // if ($admin && Hash::check($request->password, $admin->password)) {
-        //     Session::put('is_admin', true);
-        //     // optionally store admin id/name in session
-        //     Session::put('admin_id', $admin->id);
-        //     Session::put('admin_name', $admin->name);
-        //     return redirect()->route('dashboard');
-        // }
-
-        // return back()->withErrors(['username' => 'Username atau password salah']);
         $admin = Admin::where('username', $request->username)->first();
-
-        if ($admin && $request->password === $admin->password) {
+        if ($admin && Hash::check($request->password, $admin->password)) {
             Session::put('is_admin', true);
+            // optionally store admin id/name in session
             Session::put('admin_id', $admin->id);
             Session::put('admin_name', $admin->name);
-
             return redirect()->route('dashboard');
-        } else {
-            return back()->withErrors(['login' => 'Username atau password salah.']);
         }
+
+        return back()->withErrors(['username' => 'Username atau password salah']);
+        // $admin = Admin::where('username', $request->username)->first();
+
+        // if ($admin && $request->password === $admin->password) {
+        //     Session::put('is_admin', true);
+        //     Session::put('admin_id', $admin->id);
+        //     Session::put('admin_name', $admin->name);
+
+        //     return redirect()->route('dashboard');
+        // } else {
+        //     return back()->withErrors(['login' => 'Username atau password salah.']);
+        // }
     }
 
     // Dashboard admin
@@ -76,11 +78,21 @@ class AdminAuthController extends Controller
             }
         }
 
+        // Peserta yang masa magangnya akan berakhir dalam 7 hari ke depan
+        $todayCarbon = Carbon::today();
+        $weekEnd = $todayCarbon->copy()->addDays(7);
+        $expiringSoon = Participant::where('status', 'accepted')
+            ->whereBetween('end_date', [$todayCarbon->toDateString(), $weekEnd->toDateString()])
+            ->with('divisi')
+            ->get();
+
         return view('admin.dashboard', [
             'pendaftarHariIni' => $pendaftarHariIni,
             'pending' => $pending,
             'diterima' => $diterima,
             'total' => $total,
+            'expiringSoonCount' => $expiringSoon->count(),
+            'expiringSoon' => $expiringSoon,
             'bulanArr' => $bulanArr,
             'jumlahArr' => $jumlahArr,
         ]);

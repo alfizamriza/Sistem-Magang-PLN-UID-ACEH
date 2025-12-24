@@ -121,6 +121,37 @@
 
         <!-- Quick Info Panel -->
         <div class="space-y-6 animate-slide-in-right">
+            <!-- Expiring Soon (1 week) -->
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+                <h3 class="text-lg font-bold text-gray-800 mb-4">⏳ Berakhir Dalam 1 Minggu</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-600">Total</span>
+                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">{{ $expiringSoonCount ?? 0 }}</span>
+                    </div>
+
+                    @if(isset($expiringSoon) && $expiringSoon->count() > 0)
+                        <ul class="text-sm text-gray-700 space-y-2 max-h-40 overflow-auto">
+                            @foreach($expiringSoon->take(6) as $p)
+                                <li class="flex items-center justify-between">
+                                    <div>
+                                        <span class="font-semibold">{{ $p->name }}</span>
+                                        <div class="text-xs text-gray-500">{{ optional($p->divisi)->name ?? '—' }}</div>
+                                    </div>
+                                    <div class="text-xs text-gray-400">{{ \Carbon\Carbon::parse($p->end_date)->format('d M Y') }}</div>
+                                </li>
+                            @endforeach
+                        </ul>
+                        @if($expiringSoon->count() > 6)
+                            <div class="text-right mt-2">
+                                <a href="{{ url('/dashboard/semua-peserta') }}?filter=expiring" class="text-sm text-blue-600 font-semibold">Lihat semua &rarr;</a>
+                            </div>
+                        @endif
+                    @else
+                        <p class="text-sm text-gray-500">Tidak ada peserta yang akan berakhir dalam 1 minggu.</p>
+                    @endif
+                </div>
+            </div>
             <!-- System Status -->
             <div class="bg-white rounded-2xl shadow-xl p-6">
                 <h3 class="text-lg font-bold text-gray-800 mb-4">🔋 Status Sistem</h3>
@@ -177,6 +208,8 @@
                     </div>
                 </div>
             </div>
+
+            
         </div>
     </div>
 
