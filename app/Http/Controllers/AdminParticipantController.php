@@ -538,7 +538,16 @@ class AdminParticipantController extends Controller
         $perPage = 15;
         $peserta = $query->orderByDesc('created_at')->paginate($perPage)->withQueryString();
 
-        return view('admin.semua-peserta', compact('peserta'));
+        // Hitung berapa peserta yang masa magangnya akan berakhir dalam 7 hari ke depan
+        $today = Carbon::today();
+        $weekEnd = $today->copy()->addDays(7);
+        $expiringThisWeekCount = Participant::where('status', 'accepted')
+            ->whereNotNull('end_date')
+            ->whereDate('end_date', '>=', $today->toDateString())
+            ->whereDate('end_date', '<=', $weekEnd->toDateString())
+            ->count();
+
+        return view('admin.semua-peserta', compact('peserta', 'expiringThisWeekCount'));
     }
 
     /**

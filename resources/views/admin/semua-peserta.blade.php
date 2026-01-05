@@ -27,7 +27,7 @@
     </div>
 
     <!-- Quick Stats -->
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-6 mb-8">
         @php
             $stats = [
                 'pending' => ['label' => 'Pending', 'color' => 'yellow', 'icon' => 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
@@ -77,6 +77,20 @@
             </div>
         </div>
         @endforeach
+        <!-- Card: Berakhir Minggu Ini -->
+        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-indigo-500 bg-indigo-50 hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-slide-in-left" style="animation-delay: {{ count($stats) * 0.1 }}s">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-gray-600 font-medium">Berakhir Minggu Ini</p>
+                    <p class="text-2xl font-bold text-indigo-700">{{ $expiringThisWeekCount ?? 0 }}</p>
+                </div>
+                <div class="p-3 text-indigo-600 bg-indigo-100 rounded-full">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Advanced Filter Section -->

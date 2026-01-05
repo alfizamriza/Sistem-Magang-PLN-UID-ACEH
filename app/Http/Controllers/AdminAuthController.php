@@ -82,9 +82,49 @@ class AdminAuthController extends Controller
         $todayCarbon = Carbon::today();
         $weekEnd = $todayCarbon->copy()->addDays(7);
         $expiringSoon = Participant::where('status', 'accepted')
-            ->whereBetween('end_date', [$todayCarbon->toDateString(), $weekEnd->toDateString()])
+            ->whereNotNull('end_date')
+            ->whereDate('end_date', '>=', $todayCarbon->toDateString())
+            ->whereDate('end_date', '<=', $weekEnd->toDateString())
             ->with('divisi')
             ->get();
+
+        // Aktvitas terbaru (7 hari terakhir): pendaftaran & pembaruan status/profil
+        $since = Carbon::now()->subDays(7);
+        $recentRegs = Participant::where('created_at', '>=', $since)
+            ->orderByDesc('created_at')
+            ->get();
+
+        $recentUpdates = Participant::where('updated_at', '>=', $since)
+            ->whereColumn('updated_at', '>', 'created_at')
+            ->orderByDesc('updated_at')
+            ->get();
+
+        $activities = collect();
+
+        foreach ($recentRegs as $r) {
+            $activities->push([
+                'type' => 'registered',
+                'message' => "{$r->name} mendaftar",
+                'time' => $r->created_at,
+            ]);
+        }
+
+        foreach ($recentUpdates as $u) {
+            if ($u->status === 'accepted') {
+                $msg = "{$u->name} diterima";
+            } elseif ($u->status === 'rejected') {
+                $msg = "{$u->name} ditolak";
+            } else {
+                $msg = "{$u->name} diperbarui";
+            }
+            $activities->push([
+                'type' => 'updated',
+                'message' => $msg,
+                'time' => $u->updated_at,
+            ]);
+        }
+
+        $recentActivities = $activities->sortByDesc('time')->values()->take(6);
 
         return view('admin.dashboard', [
             'pendaftarHariIni' => $pendaftarHariIni,

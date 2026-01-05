@@ -109,10 +109,6 @@
         <div class="lg:col-span-2 bg-white rounded-2xl shadow-xl p-8 animate-slide-in-bottom">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-2xl font-bold text-gray-800">📊 Grafik Pendaftar per Bulan</h2>
-                <div class="flex space-x-2">
-                    <button class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-full">6 Bulan</button>
-                    <button class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full">1 Tahun</button>
-                </div>
             </div>
             <div class="w-full md:w-2/3 mx-auto">
                 <canvas id="chartPendaftar" style="max-height:320px;max-width:100%;height:320px;width:100%;"></canvas>
@@ -153,7 +149,7 @@
                 </div>
             </div>
             <!-- System Status -->
-            <div class="bg-white rounded-2xl shadow-xl p-6">
+            {{-- <div class="bg-white rounded-2xl shadow-xl p-6">
                 <h3 class="text-lg font-bold text-gray-800 mb-4">🔋 Status Sistem</h3>
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
@@ -169,27 +165,28 @@
                         <span class="text-xs text-gray-500">2 jam lalu</span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Recent Activity -->
             <div class="bg-white rounded-2xl shadow-xl p-6">
                 <h3 class="text-lg font-bold text-gray-800 mb-4">⚡ Aktivitas Terbaru</h3>
                 <div class="space-y-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        <span class="text-sm text-gray-600">3 pendaftar baru</span>
-                        <span class="text-xs text-gray-400">10 menit lalu</span>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span class="text-sm text-gray-600">2 peserta diterima</span>
-                        <span class="text-xs text-gray-400">1 jam lalu</span>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                        <span class="text-sm text-gray-600">5 berkas di-review</span>
-                        <span class="text-xs text-gray-400">2 jam lalu</span>
-                    </div>
+                    @if(isset($recentActivities) && $recentActivities->count() > 0)
+                        @foreach($recentActivities as $act)
+                            <div class="flex items-center space-x-3">
+                                @php
+                                    $dotColor = 'bg-gray-400';
+                                    if($act['type'] === 'registered') $dotColor = 'bg-blue-500';
+                                    if($act['type'] === 'updated') $dotColor = 'bg-green-500';
+                                @endphp
+                                <div class="w-2 h-2 {{ $dotColor }} rounded-full"></div>
+                                <span class="text-sm text-gray-600">{{ $act['message'] }}</span>
+                                <span class="text-xs text-gray-400">{{ \Carbon\Carbon::parse($act['time'])->diffForHumans() }}</span>
+                            </div>
+                        @endforeach
+                    @else
+                        <p class="text-sm text-gray-500">Belum ada aktivitas terbaru.</p>
+                    @endif
                 </div>
             </div>
 
